@@ -5,7 +5,7 @@ import moment from 'moment';
 
 const Sidebar = () => {
 
-    const {chats, setSelectedChat, user} = useAppContext();
+    const {chats, setSelectedChat, user, navigate} = useAppContext();
     const [search, setSearch] = useState("");
 
   return (
@@ -15,7 +15,7 @@ const Sidebar = () => {
             <h1 className='text-xl font-semibold text-gray-600'>AIYA</h1>
         </div>
 
-        <button className='flex justify-center items-center w-full py-2 mt-10 text-white bg-linear-to-r from-[#a456f7] to-[#3d81f6] text-sm rounded-md cursor-pointer'>
+        <button className='flex justify-center items-center w-full py-2 mt-10 text-white btn btn-primary text-sm rounded-md cursor-pointer'>
             <span className='mr-2 text-xl'>+</span> New Chat
         </button>
 
@@ -44,12 +44,27 @@ const Sidebar = () => {
         </div>
 
         {/* Community Images */}
-        <div className='flex items-center gap-2 p-3 mt-4 border border-gray-300 rounded-md cursor-pointer hover:scale-103 transition-all'>
-            <img src={assets.gallery_icon} alt="" className='w-4.5 filter invert' />
+        <div onClick={()=>{navigate('/community')}} className='flex items-center gap-2 p-3 mt-4 border border-gray-300 rounded-md cursor-pointer hover:scale-103 transition-all'>
+            <img src={assets.gallery_icon} alt="" className="w-4.5 filter invert" />
             <div className='flex flex-col text-sm'>
                 <p>Community Images</p>
-                52:28
+                
             </div>
+        </div>
+
+        {/* Credits */}
+        <div onClick={()=>{navigate('/credits')}} className='flex items-center gap-2 p-3 mt-4 border border-gray-300 rounded-md cursor-pointer hover:scale-103 transition-all'>
+            <img src={assets.diamond_icon} alt="" className='w-4.5 ' />
+            <div className='flex flex-col text-sm'>
+                <p>Credits : {user?.credits}</p>
+                <p className='text-xs text-gray-400'>Purchase credits to use Aiya</p>
+            </div>
+        </div>
+
+        {/* Dark Mode Toggle */}
+        <div onClick={()=>{navigate('/community')}} className='flex items-center gap-2 p-3 mt-4 border border-gray-300 rounded-md justify-between'>
+                <p className='text-sm'>Theme</p>
+                <input type="checkbox" value="forest" className="toggle theme-controller"/>
         </div>
 
     </div>
