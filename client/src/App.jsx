@@ -7,8 +7,13 @@ import { useState } from 'react'
 import { Menu } from 'lucide-react'
 import './assets/prism.css'
 import Loading from './pages/Loading'
+import Login from './pages/Login'
+import { useAppContext } from './context/AppContext'
 
 const App = () => {
+
+  const {user} = useAppContext();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
 
@@ -17,6 +22,9 @@ const App = () => {
   return (
     <>
     {!isMenuOpen && <Menu onClick={()=>setIsMenuOpen(true)} className='absolute top-3 left-3 size-5 cursor-pointer md:hidden z-2'/>}
+
+
+    {user ? (
       <div className='flex h-screen w-screen'>
         <Sidebar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
         <Routes>
@@ -25,6 +33,13 @@ const App = () => {
           <Route path='/community' element={<Community/>}/>
         </Routes>
       </div>
+    ) : (
+      <div className='flex items-center h-screen w-screen justify-center bg-linear-to-b from-primary/50 to-primary'>
+        <Login/>
+      </div>
+    )}
+
+      
 
       
     </>
