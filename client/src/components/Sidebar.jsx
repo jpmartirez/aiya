@@ -13,7 +13,7 @@ const Sidebar = ({isMenuOpen, setIsMenuOpen}) => {
     <div className={`flex flex-col h-screen min-w-72 p-5 border-r border-[#80609f]/30 backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1 ${!isMenuOpen && 'max-md:-translate-x-full'}`}>
         <div className='flex items-center justify-center'>
             <img src={assets.logo} alt="logo" className='w-full max-w-20' />
-            <h1 className='text-xl font-semibold text-gray-600'>AIYA</h1>
+            <h1 className='text-xl font-black text-primary'>AIYA</h1>
         </div>
 
         <button className='flex justify-center items-center w-full py-2 mt-10 text-white btn btn-primary text-sm rounded-md cursor-pointer'>
@@ -23,7 +23,7 @@ const Sidebar = ({isMenuOpen, setIsMenuOpen}) => {
         {/* Search Conversations */}
         <div className='flex items-center gap-2 p-3 mt-4 border border-gray-400 rounded-md'>
             <Search className='w-4'/>
-            <input onChange={(e)=> setSearch(e.target.value)} value={search} type="text" placeholder='Search conversations...' className='text-xs placeholder:text-gray-400 outline-none' />
+            <input onChange={(e)=> setSearch(e.target.value)} value={search} type="text" placeholder='Search conversations...' className='text-xs  outline-none' />
         </div>
 
         {/* Recent Chats */}

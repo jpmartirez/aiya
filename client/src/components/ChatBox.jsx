@@ -19,7 +19,7 @@ const ChatBox = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    
     setPrompt("");
   }
 
