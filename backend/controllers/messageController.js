@@ -73,7 +73,7 @@ export const imageMessageController = async (req, res) => {
 
         // Generate image
         const encodedPrompt = encodeURIComponent(prompt);
-        const generatedImageUrl = `${process.env.IMAGEKIT_URL_ENDPOINT}/ik-genimg-prompt-${encodedPrompt}/aiya/${Date.now()}.png?tr=w-800,h-800`;
+        const generatedImageUrl = `${process.env.IMAGEKIT_URL_ENDPOINT}/ik-genimg-prompt-${encodedPrompt}/${Date.now()}.png?tr=w-800,h-800`;
 
         // Fetch the generated image to ensure it's created
         const aiImgResponse = await axios.get(generatedImageUrl, {responseType: 'arraybuffer'});
