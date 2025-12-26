@@ -19,7 +19,7 @@ const Sidebar = ({isMenuOpen, setIsMenuOpen}) => {
         <button className='flex justify-center items-center w-full py-2 mt-10 text-white btn btn-primary text-sm rounded-md cursor-pointer'>
             <span className='mr-2 text-xl'>+</span> New Chat
         </button>
-
+ 
         {/* Search Conversations */}
         <div className='flex items-center gap-2 p-3 mt-4 border border-gray-400 rounded-md'>
             <Search className='w-4'/>
