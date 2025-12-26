@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 import connectDB from './config/db.js';
 import router from './routes/userRoutes.js';
+import chatRouter from './routes/chatRoutes.js';
 
 dotenv.config();
 
@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
     res.send('Server is running');
 })
 app.use('/api/user', router);
+app.use('/api/chat', chatRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
