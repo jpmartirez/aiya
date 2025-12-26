@@ -8,9 +8,11 @@ const client = new ImageKit({
 
 export const uploadImage = async (aiImgResponse, fileName) => {
     const uploadResponse = await client.files.upload({
-      file: aiImgResponse.data, 
+      file: aiImgResponse.data.toString('base64'), 
       fileName: fileName,
       folder: "aiya"
     });
+
+    return uploadResponse;
 } 
 
