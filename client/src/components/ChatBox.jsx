@@ -8,7 +8,7 @@ const ChatBox = () => {
 
   const containerRef = useRef(null);
 
-  const {selectedChat} = useAppContext();
+  const {selectedChat, user, axios, token, setUser} = useAppContext();
 
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);

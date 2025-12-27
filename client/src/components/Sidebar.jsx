@@ -3,11 +3,39 @@ import { useAppContext } from '../context/AppContext'
 import { assets } from '../assets/assets.js';
 import moment from 'moment';
 import { Image, Search, Gem, Trash, LogOut, X} from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const Sidebar = ({isMenuOpen, setIsMenuOpen}) => {
 
-    const {chats, setSelectedChat, user, navigate} = useAppContext();
+    const {chats, setSelectedChat, user, navigate, createNewChat, axios, setChats, fetchUserChats, setToken, token} = useAppContext();
     const [search, setSearch] = useState("");
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        setToken(null);
+        toast.success("Logged out successfully")
+    }
+
+    const deleteChat = async (e, chatId) => {
+        try {
+            e.stopPropagation();
+
+            const confirm = window.confirm("Are you sure you want to delete this chat? ")
+            if(!confirm) return
+
+            const {data} = await axios.post('api/chat/delete', {chatId}, {headers: 
+                {Authorization: token}})
+
+            if (data.success){
+                setChats(prev => prev.filter(chat => chat._id !== chatId))
+                await fetchUserChats();
+                toast.success(data.message)
+            }
+
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
 
   return (
     <div className={`flex flex-col h-screen min-w-72 p-5 border-r border-[#80609f]/30 backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1 ${!isMenuOpen && 'max-md:-translate-x-full'}`}>
@@ -16,7 +44,7 @@ const Sidebar = ({isMenuOpen, setIsMenuOpen}) => {
             <h1 className='text-xl font-black text-primary'>AIYA</h1>
         </div>
 
-        <button className='flex justify-center items-center w-full py-2 mt-10 text-white btn btn-primary text-sm rounded-md cursor-pointer'>
+        <button onClick={e=>toast.promise(createNewChat, {loading: 'creating...'})} className='flex justify-center items-center w-full py-2 mt-10 text-white btn btn-primary text-sm rounded-md cursor-pointer'>
             <span className='mr-2 text-xl'>+</span> New Chat
         </button>
  
@@ -38,7 +66,7 @@ const Sidebar = ({isMenuOpen, setIsMenuOpen}) => {
 
                             <p className='text-xs text-gray-500 '>{moment(chat.updatedAt).fromNow()}</p>
                         </div>
-                        <Trash className='hidden group-hover:block w-4.5 cursor-pointer'/>
+                        <Trash className='hidden group-hover:block w-4.5 cursor-pointer' onClick={e=>toast.promise(deleteChat(e, chat._id), {loading: 'deleting...'})}/>
                     </div>
                 ))
             }
@@ -72,7 +100,7 @@ const Sidebar = ({isMenuOpen, setIsMenuOpen}) => {
         <div className='flex items-center gap-2 p-3 mt-4 border border-gray-300 rounded-md cursor-pointer hover:scale-103 transition-all group'>
             <img src={assets.user_icon} alt="User Icon" className='w-7 rounded-full ' />
             <p className='flex-1 text-sm truncate'>{user ? user.name : "Login your account"}</p>
-            {user && <LogOut className='h-5 cursor-pointer hidden group-hover:block'/>}
+            {user && <LogOut className='h-5 cursor-pointer hidden group-hover:block' onClick={logout}/>}
         </div>
 
         {/* Close Icon */}
