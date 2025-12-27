@@ -1,6 +1,5 @@
 import Transaction from "../models/Transaction";
 
-
 const plans = [
     {
         _id: "basic",
@@ -35,7 +34,7 @@ export const getPlans = async (req, res) => {
 }
 
 // Controller for purchasing a plan
-export const purcahsePlan = async (req, res) => {
+export const purchasePlan = async (req, res) => {
     try {
         const {planId} = req.body;
 
@@ -57,6 +56,6 @@ export const purcahsePlan = async (req, res) => {
 
         
     } catch (error) {
-        
+        res.json({success: false, message: error.message});
     }
 }
