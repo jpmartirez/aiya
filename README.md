@@ -2,7 +2,7 @@
 
 A modern AI-powered chat application built with the MERN stack, featuring image generation, text conversations, and secure payments.
 
-#### Live Viewing : [Aiya]()
+#### Live Viewing : [Aiya](https://aiya-ochre.vercel.app/)
 
 ## 🚀 Tech Stack
 
@@ -123,6 +123,9 @@ A modern AI-powered chat application built with the MERN stack, featuring image 
 - `GET /api/credit/plan` - Get credit plans
 - `POST /api/credit/purchase` - Purchase credits
 
+
+## Test Payment
+To test the payment system, go to [Stripe Test Cards](https://docs.stripe.com/testing#cards) to use sample card number. (Don't use real card number)
 
 ## 🙏 Credits
 
