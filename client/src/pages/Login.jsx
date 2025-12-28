@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const Login = () => {
   const [state, setState] = useState("login");
@@ -9,6 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const {axios, setToken} = useAppContext();
+  
+  const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -20,6 +23,8 @@ const Login = () => {
         if(data.success){
             setToken(data.token);
             localStorage.setItem("token", data.token);
+            navigate('/loading')
+            
         } else {
             toast.error(data.message);
         }
