@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/register', registerUser)
 router.post('/login', loginUser);
 router.get('/data', protect, getUserDetails);
-router.get('/published-images', protect, getPublishedImages);
+router.get('/published-images', getPublishedImages);
 
 export default router;
 
