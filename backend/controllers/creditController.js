@@ -40,10 +40,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const purchasePlan = async (req, res) => {
     try {
         const {planId} = req.body;
+        console.log('The plan id is ', planId)
 
         const userId = req.user._id;
+        console.log('The user id is ', userId)
 
         const plan = plans.find(plan => plan._id === planId);
+        console.log('Plan:', plan)
 
         if (!plan){
             return res.json({success: false, message: 'Invalid plan ID'});
@@ -58,6 +61,7 @@ export const purchasePlan = async (req, res) => {
         })
 
         const {origin} = req.headers;
+        console.log('Origin:', origin)
 
         const session = await stripe.checkout.sessions.create({
             line_items: [
@@ -73,7 +77,7 @@ export const purchasePlan = async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: `${origin}loading`,
+            success_url: `${origin}/loading`,
             cancel_url: `${origin}`,
             metadata: {
                 transactionId: transaction._id.toString(),
@@ -82,9 +86,10 @@ export const purchasePlan = async (req, res) => {
             expires_at: Math.floor(Date.now() / 1000) + 30 * 60, // 30 minutes from now
         });
 
+        console.log('Session:', session)
+
         res.json({success: true, url: session.url});
 
-        
     } catch (error) {
         res.json({success: false, message: error.message});
     }
