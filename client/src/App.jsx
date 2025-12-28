@@ -25,7 +25,6 @@ const App = () => {
     <Toaster/>
     {!isMenuOpen && <Menu onClick={()=>setIsMenuOpen(true)} className='absolute top-3 left-3 size-5 cursor-pointer md:hidden z-2'/>}
 
-
     {user ? (
       <div className='flex h-screen w-screen'>
         <Sidebar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>

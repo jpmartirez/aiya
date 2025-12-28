@@ -10,8 +10,9 @@ const Credits = () => {
   const fetchPlans = async () => {
     setPlans(dummyPlans)
     setLoading(false)
-
   }
+
+  
 
   useEffect(() => {
     fetchPlans()
