@@ -4,16 +4,20 @@ import { assets } from '../assets/assets.js';
 import moment from 'moment';
 import { Image, Search, Gem, Trash, LogOut, X} from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const Sidebar = ({isMenuOpen, setIsMenuOpen}) => {
 
     const {chats, setSelectedChat, user, navigate, createNewChat, axios, setChats, fetchUserChats, setToken, token} = useAppContext();
     const [search, setSearch] = useState("");
 
+    
     const logout = () => {
+        
         localStorage.removeItem('token');
         setToken(null);
         toast.success("Logged out successfully")
+        
     }
 
     const deleteChat = async (e, chatId) => {
@@ -36,6 +40,8 @@ const Sidebar = ({isMenuOpen, setIsMenuOpen}) => {
             toast.error(error.message);
         }
     }
+
+
 
   return (
     <div className={`flex flex-col h-screen min-w-72 p-5 border-r border-[#80609f]/30 backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1 ${!isMenuOpen && 'max-md:-translate-x-full'}`}>
